@@ -1,7 +1,9 @@
 import streamlit as st
 import requests
-import bs4
-from bs4 import BeautifulSoup4
+try:
+    from bs4 import BeautifulSoup4
+except:
+    from BeautifulSoup import BeautifulSoup
 import numpy as np
 import tensorflow as tf
 import pandas as pd
