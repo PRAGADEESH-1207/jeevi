@@ -1,0 +1,6 @@
+$projectName='todo-list' # enter projectname
+git clone https://github.com/arunachaleshwaran/class-template.git $projectName;
+cd $projectName;
+git remote remove --all
+npm i
+code .

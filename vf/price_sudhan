@@ -1,0 +1,18 @@
+import pandas as pd
+excel_file = 'pricelist.xlsx'
+df = pd.read_excel(excel_file)
+
+lst = df['vegatables and fruits '].tolist()
+predictions = 'pineapple'
+print(type(predictions))
+for i in lst:
+    #print(type(i))
+    
+    if predictions == i:
+        idx = lst.index(i)
+        print(i)
+        print(idx)
+
+print(df.at[idx,'price'])
+
+
