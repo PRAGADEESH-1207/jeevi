@@ -3,5 +3,9 @@ beautifulsoup4
 pandas
 numpy
 tensorflow
+wrangle
+pickle
+sys
+path
 
 
