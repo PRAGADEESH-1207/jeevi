@@ -40,8 +40,7 @@ app_mode = st.sidebar.selectbox("Select Page", ["Home", "About Project", "Predic
 # Main Page
 if app_mode == "Home":
     st.header("FRUITS & VEGETABLES RECOGNITION SYSTEM")
-    image_path = "vf/thomas-le-pRJhn4MbsMM-unsplash.jpg"
-    image.open(image_path)
+    Image.open('vf/thomas-le-pRJhn4MbsMM-unsplash.jpg')
 
 # About Project
 elif app_mode == "About Project":
