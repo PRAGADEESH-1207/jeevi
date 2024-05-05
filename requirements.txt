@@ -3,6 +3,10 @@ beautifulsoup4
 pandas
 numpy
 tensorflow
+load_model
+img_to_array
+load_img
+array_to_img
 
 
 
