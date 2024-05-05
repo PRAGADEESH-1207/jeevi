@@ -18,8 +18,7 @@ def model_prediction(test_image):
 def prices(predicted_item):
     
     predictions =predicted_item
-    excel_file = 'pricelist2.xlsx'
-    df = pd.read_excel(excel_file)
+    df = pd.read_excel('vf\pricelist2.xlsx')
     plst= df['price'].tolist()
     lst = df['vegatables and fruits '].tolist()
     for i in lst:
