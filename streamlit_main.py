@@ -1,36 +1,27 @@
 import streamlit as st
-import requests
-from bs4 import BeautifulSoup
 import numpy as np
 import tensorflow as tf
 import pandas as pd
 
-#Tensorflow Model Prediction
-def model_prediction(test_image):
-    model = tf.keras.models.load_model("trained_model.h5")
+# Tensorflow Model Prediction
+@st.cache(allow_output_mutation=True)
+def load_model():
+    return tf.keras.models.load_model("trained_model.h5")
+
+def model_prediction(model, test_image):
     image = tf.keras.preprocessing.image.load_img(test_image, target_size=(64, 64))
     input_arr = tf.keras.preprocessing.image.img_to_array(image)
-    input_arr = np.array([input_arr]) #convert single image to batch
+    input_arr = np.array([input_arr])  # Convert single image to batch
     predictions = model.predict(input_arr)
-    return np.argmax(predictions) #return index of max element
+    return np.argmax(predictions)  # Return index of max element
 
-#function form sheets
-def prices(predicted_item):
-    
-    predictions =predicted_item
+# Function for fetching prices from sheet
+def fetch_prices(predicted_item):
     df = pd.read_excel('vf/pricelist2.xlsx')
-    plst= df['price'].tolist()
-    lst = df['vegatables and fruits '].tolist()
-    for i in lst:
-    #print(type(i))
-    
-        if predictions == i:
-            idx = lst.index(i)
-            print(i)
-            print(idx)
-        
-    price = plst[idx]
-    return price
+    idx = df.index[df['vegatables and fruits '] == predicted_item].tolist()
+    if idx:  # Check if index is not empty
+        return df.loc[idx[0], 'price']
+    return None
 
 # Sidebar
 st.sidebar.title("Dashboard")
@@ -64,7 +55,8 @@ elif app_mode == "Prediction":
     # Predict button
     if st.button("Predict") and test_image is not None:
         st.write("Our Prediction")
-        result_index = model_prediction(test_image)
+        model = load_model()
+        result_index = model_prediction(model, test_image)
         # Reading Labels
         with open("vf/labels.txt") as f:
             content = f.readlines()
@@ -72,10 +64,10 @@ elif app_mode == "Prediction":
         predicted_item = labels[result_index]
         st.success("Model is Predicting it's a {}".format(predicted_item))
 
-        # Scrape market prices
-        prices = prices(predicted_item)
-        
-        st.write("market price in Rs")
-
-        # Display market price if available
-        st.write(prices)
+        # Fetch market prices
+        market_price = fetch_prices(predicted_item)
+        if market_price:
+            st.write("Market price in Rs:")
+            st.write(market_price)
+        else:
+            st.warning("Market price not available for {}".format(predicted_item))
