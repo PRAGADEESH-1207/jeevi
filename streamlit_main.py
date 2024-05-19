@@ -7,11 +7,11 @@ import pandas as pd
 
 #Tensorflow Model Prediction
 def model_prediction(test_image):
-    #model = tf.keras.models.load_model("trained_model.h5")
+    model = tf.keras.models.load_model("trained_model.h5")
     image = tf.keras.preprocessing.image.load_img(test_image, target_size=(64, 64))
     input_arr = tf.keras.preprocessing.image.img_to_array(image)
     input_arr = np.array([input_arr]) #convert single image to batch
-    #predictions = model.predict(input_arr)
+    predictions = model.predict(input_arr)
     return np.argmax(predictions) #return index of max element
 
 #function form sheets
