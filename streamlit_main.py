@@ -66,7 +66,7 @@ elif app_mode == "Prediction":
         st.write("Our Prediction")
         result_index = model_prediction(test_image)
         # Reading Labels
-        with open("labels.txt") as f:
+        with open("vf/labels.txt") as f:
             content = f.readlines()
         labels = [i.strip() for i in content]
         predicted_item = labels[result_index]
