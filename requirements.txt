@@ -4,6 +4,7 @@ pandas
 numpy
 tensorflow
 openpyxl
+model_prediction
 
 
 
