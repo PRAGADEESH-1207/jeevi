@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import numpy as np
 import tensorflow as tf
 import pandas as pd
-import openpyxl
 
 #Tensorflow Model Prediction
 def model_prediction(test_image):
