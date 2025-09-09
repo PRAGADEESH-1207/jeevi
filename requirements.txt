@@ -1,10 +1,4 @@
 streamlit
-beautifulsoup4
-pandas
+tensorflow==2.15.0
 numpy
-tensorflow
-openpyxl
-
-
-
-
+pillow
